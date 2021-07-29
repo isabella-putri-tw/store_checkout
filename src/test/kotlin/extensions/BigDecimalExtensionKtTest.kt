@@ -2,9 +2,8 @@ package extensions
 
 import assertk.assertThat
 import assertk.assertions.isEqualByComparingTo
-import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 
 internal class BigDecimalExtensionKtTest {

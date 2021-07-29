@@ -15,7 +15,7 @@ class ReceiptCalculator {
             val receiptItems = mutableListOf<ReceiptItem>()
             items.forEach { item ->
                 val receiptItem = ReceiptItem.builder(item)
-                salesTax = salesTax.add(receiptItem.tax)
+                salesTax = salesTax.add(receiptItem.tax.totalTax())
                 total = total.add(receiptItem.total)
                 receiptItems.add(receiptItem)
             }

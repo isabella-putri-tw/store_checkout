@@ -2,11 +2,8 @@ package services
 
 import assertk.assertThat
 import assertk.assertions.hasSameSizeAs
-import assertk.assertions.isDataClassEqualTo
 import assertk.assertions.isEqualByComparingTo
-import assertk.assertions.isEqualTo
 import model.Item
-import model.ReceiptItem
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
@@ -26,13 +23,16 @@ internal class ReceiptCalculatorTest {
 
             assertThat(actualReceipt.items).hasSameSizeAs(items)
 
-            assertThat(actualReceipt.items[0].tax).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[0].tax.local).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[0].tax.import).isEqualByComparingTo(BigDecimal.ZERO)
             assertThat(actualReceipt.items[0].total).isEqualByComparingTo(BigDecimal("12.49"))
 
-            assertThat(actualReceipt.items[1].tax).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[1].tax.local).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[1].tax.import).isEqualByComparingTo(BigDecimal.ZERO)
             assertThat(actualReceipt.items[1].total).isEqualByComparingTo(BigDecimal("0.85"))
 
-            assertThat(actualReceipt.items[2].tax).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[2].tax.local).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[2].tax.import).isEqualByComparingTo(BigDecimal.ZERO)
             assertThat(actualReceipt.items[2].total).isEqualByComparingTo(BigDecimal("19.50"))
 
             assertThat(actualReceipt.salesTax).isEqualByComparingTo(BigDecimal.ZERO)
@@ -49,7 +49,8 @@ internal class ReceiptCalculatorTest {
 
             assertThat(actualReceipt.items).hasSameSizeAs(items)
 
-            assertThat(actualReceipt.items[0].tax).isEqualByComparingTo(BigDecimal("3"))
+            assertThat(actualReceipt.items[0].tax.local).isEqualByComparingTo(BigDecimal("3"))
+            assertThat(actualReceipt.items[0].tax.import).isEqualByComparingTo(BigDecimal.ZERO)
             assertThat(actualReceipt.items[0].total).isEqualByComparingTo(BigDecimal("33"))
 
             assertThat(actualReceipt.salesTax).isEqualByComparingTo(BigDecimal("3"))
@@ -67,10 +68,12 @@ internal class ReceiptCalculatorTest {
 
             assertThat(actualReceipt.items).hasSameSizeAs(items)
 
-            assertThat(actualReceipt.items[0].tax).isEqualByComparingTo(BigDecimal("2.5"))
+            assertThat(actualReceipt.items[0].tax.local).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[0].tax.import).isEqualByComparingTo(BigDecimal("2.5"))
             assertThat(actualReceipt.items[0].total).isEqualByComparingTo(BigDecimal("52.5"))
 
-            assertThat(actualReceipt.items[1].tax).isEqualByComparingTo(BigDecimal("15"))
+            assertThat(actualReceipt.items[1].tax.local).isEqualByComparingTo(BigDecimal("10"))
+            assertThat(actualReceipt.items[1].tax.import).isEqualByComparingTo(BigDecimal("5"))
             assertThat(actualReceipt.items[1].total).isEqualByComparingTo(BigDecimal("115"))
 
             assertThat(actualReceipt.salesTax).isEqualByComparingTo(BigDecimal("17.5"))
@@ -90,16 +93,20 @@ internal class ReceiptCalculatorTest {
 
             assertThat(actualReceipt.items).hasSameSizeAs(items)
 
-            assertThat(actualReceipt.items[0].tax).isEqualByComparingTo(BigDecimal("4.20"))
+            assertThat(actualReceipt.items[0].tax.local).isEqualByComparingTo(BigDecimal("2.80"))
+            assertThat(actualReceipt.items[0].tax.import).isEqualByComparingTo(BigDecimal("1.40"))
             assertThat(actualReceipt.items[0].total).isEqualByComparingTo(BigDecimal("32.19"))
 
-            assertThat(actualReceipt.items[1].tax).isEqualByComparingTo(BigDecimal("1.90"))
+            assertThat(actualReceipt.items[1].tax.local).isEqualByComparingTo(BigDecimal("1.90"))
+            assertThat(actualReceipt.items[1].tax.import).isEqualByComparingTo(BigDecimal.ZERO)
             assertThat(actualReceipt.items[1].total).isEqualByComparingTo(BigDecimal("20.89"))
 
-            assertThat(actualReceipt.items[2].tax).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[2].tax.local).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[2].tax.import).isEqualByComparingTo(BigDecimal.ZERO)
             assertThat(actualReceipt.items[2].total).isEqualByComparingTo(BigDecimal("9.75"))
 
-            assertThat(actualReceipt.items[3].tax).isEqualByComparingTo(BigDecimal("0.6"))
+            assertThat(actualReceipt.items[3].tax.local).isEqualByComparingTo(BigDecimal.ZERO)
+            assertThat(actualReceipt.items[3].tax.import).isEqualByComparingTo(BigDecimal("0.6"))
             assertThat(actualReceipt.items[3].total).isEqualByComparingTo(BigDecimal("11.85"))
 
             assertThat(actualReceipt.salesTax).isEqualByComparingTo(BigDecimal("6.7"))
