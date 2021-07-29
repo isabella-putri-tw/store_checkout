@@ -25,6 +25,8 @@ data class Item(val quantity: Int, val name: String, val price: BigDecimal) {
     }
 }
 
+// If the function is in the same file as the extension subject, you might want to consider
+// moving it into the Item class as an instance method instead
 fun Item.isImported(): Boolean = this.name.indexOf("imported") >= 0
 
 fun Item.countTotal(): BigDecimal = this.price.multiply(BigDecimal(this.quantity))
