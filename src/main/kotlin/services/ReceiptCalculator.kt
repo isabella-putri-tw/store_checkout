@@ -7,8 +7,6 @@ import java.math.BigDecimal
 
 class ReceiptCalculator {
     companion object {
-
-
         fun calculate(items:List<Item>): Receipt {
             var total = BigDecimal.ZERO
             var salesTax = BigDecimal.ZERO
@@ -22,6 +20,5 @@ class ReceiptCalculator {
 
             return Receipt(receiptItems, salesTax, total)
         }
-
     }
 }

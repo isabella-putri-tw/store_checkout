@@ -2,12 +2,14 @@ package extensions
 
 import com.jakewharton.picnic.*
 import model.Receipt
-import model.ReceiptItem
 import java.math.BigDecimal
 
-// This extension here is appropriate but you might want to change the package/ file name to indicate that
-// the extensions in this file is related to output formatting
-fun Receipt.buildReceiptTable() = table {
+enum class ReceiptTableField(val displayName: String) {
+    QTY("Qty"), NAME("Name"), PRICE("Price"), TAX("Tax"), LOCAL("Local"), IMPORT("Import"),
+    SALES_TAX("Sales tax"), TOTAL("Total")
+}
+
+fun Receipt.buildTable() = table {
     style {
         borderStyle = BorderStyle.Solid
     }
@@ -18,8 +20,8 @@ fun Receipt.buildReceiptTable() = table {
         borderRight = true
     }
     buildHeader()
-    buildBody(this, this@buildReceiptTable)
-    buildFooter(this, this@buildReceiptTable)
+    buildBody(this, this@buildTable)
+    buildFooter(this, this@buildTable)
 }
 
 private fun buildFooter(tableDsl: TableDsl, receipt: Receipt) {
@@ -28,8 +30,8 @@ private fun buildFooter(tableDsl: TableDsl, receipt: Receipt) {
             border = true
             alignment = TextAlignment.MiddleRight
         }
-        buildFooterRow(this, Receipt.Field.SALES_TAX.displayName, receipt.salesTax)
-        buildFooterRow(this, Receipt.Field.TOTAL.displayName, receipt.total)
+        buildFooterRow(this, ReceiptTableField.SALES_TAX.displayName, receipt.salesTax)
+        buildFooterRow(this, ReceiptTableField.TOTAL.displayName, receipt.total)
     }
 }
 
@@ -57,13 +59,13 @@ private fun TableDsl.buildHeader() {
             alignment = TextAlignment.MiddleLeft
         }
         row {
-            cell(ReceiptItem.Field.QTY.displayName) { rowSpan = 2 }
-            cell(ReceiptItem.Field.NAME.displayName) { rowSpan = 2 }
-            cell(ReceiptItem.Field.PRICE.displayName) { rowSpan = 2 }
-            cell(ReceiptItem.Field.TAX.displayName) { columnSpan = 2 }
-            cell(ReceiptItem.Field.TOTAL.displayName) { rowSpan = 2 }
+            cell(ReceiptTableField.QTY.displayName) { rowSpan = 2 }
+            cell(ReceiptTableField.NAME.displayName) { rowSpan = 2 }
+            cell(ReceiptTableField.PRICE.displayName) { rowSpan = 2 }
+            cell(ReceiptTableField.TAX.displayName) { columnSpan = 2 }
+            cell(ReceiptTableField.TOTAL.displayName) { rowSpan = 2 }
         }
-        row(ReceiptItem.Field.LOCAL.displayName, ReceiptItem.Field.IMPORT.displayName)
+        row(ReceiptTableField.LOCAL.displayName, ReceiptTableField.IMPORT.displayName)
     }
 }
 

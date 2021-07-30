@@ -2,7 +2,7 @@ package services
 
 import com.jakewharton.picnic.renderText
 import exceptions.ItemException
-import extensions.buildReceiptTable
+import extensions.buildTable
 import model.Item
 import model.Receipt
 import org.apache.commons.lang3.StringUtils
@@ -20,7 +20,6 @@ class CheckoutService {
         const val ASK_FOR_ITEM = "What item do you buy (input `-` to stop entering item)?"
     }
     fun checkout() {
-        // Nice separation of concerns between I/O and receipt calculation
         welcome()
         val items = enterItems()
         printReceipt(ReceiptCalculator.calculate(items))
@@ -28,7 +27,7 @@ class CheckoutService {
 
     private fun printReceipt(receipt: Receipt) {
         println("${StringUtils.center(" RECEIPT ", 50, "-")}\n")
-        println(receipt.buildReceiptTable().renderText())
+        println(receipt.buildTable().renderText())
     }
 
     private fun enterItems(): List<Item> {

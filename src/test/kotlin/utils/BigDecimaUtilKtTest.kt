@@ -1,4 +1,4 @@
-package extensions
+package utils
 
 import assertk.assertThat
 import assertk.assertions.isEqualByComparingTo
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 
-internal class BigDecimalExtensionKtTest {
+internal class BigDecimaUtilKtTest {
 
     @Nested
     inner class RoundUp() {

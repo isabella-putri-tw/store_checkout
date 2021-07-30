@@ -1,7 +1,7 @@
 package validators
 
 import exceptions.ItemException
-import extensions.isElementEmpty
+import utils.isElementEmpty
 
 private val DECIMAL_REGEX = "^\\d*\\.?\\d{1,2}\$".toRegex()
 private val INT_REGEX = "^\\d+\$".toRegex()
