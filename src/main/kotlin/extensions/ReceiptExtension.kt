@@ -5,7 +5,8 @@ import model.Receipt
 import model.ReceiptItem
 import java.math.BigDecimal
 
-
+// This extension here is appropriate but you might want to change the package/ file name to indicate that
+// the extensions in this file is related to output formatting
 fun Receipt.buildReceiptTable() = table {
     style {
         borderStyle = BorderStyle.Solid

@@ -20,6 +20,7 @@ class CheckoutService {
         const val ASK_FOR_ITEM = "What item do you buy (input `-` to stop entering item)?"
     }
     fun checkout() {
+        // Nice separation of concerns between I/O and receipt calculation
         welcome()
         val items = enterItems()
         printReceipt(ReceiptCalculator.calculate(items))
